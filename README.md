@@ -24,6 +24,7 @@ It provides standard operations on a set of data:
 
 - implement NgRx to maintain application state in a modern way
 - Unit/Integration tests
+- Data validation (for `add` and `modify` dialogs)
 
 
 ## Running (DEV mode)
