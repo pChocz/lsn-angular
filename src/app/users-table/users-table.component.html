@@ -1,0 +1,203 @@
+
+<div class="d-flex justify-content-center m-2">
+  <button mat-raised-button
+          (click)="addUser()"
+          color="primary">
+    Add new user
+  </button>
+</div>
+
+<mat-form-field class="w-100" appearance="outline">
+  <mat-label>
+    Filter
+  </mat-label>
+  <input #input
+         (keyup)="applyFilter($event)"
+         matInput
+         placeholder="You can filter by username, first name, last name and role"
+         autocapitalize="off"
+         autocorrect="off"
+         spellcheck="false">
+</mat-form-field>
+
+<div class="row">
+  <div class="col p-1">
+    <div class="mat-elevation-z3 overflow-auto">
+
+    <table [dataSource]="dataSource"
+           mat-table>
+
+      <ng-container matColumnDef="number-column">
+        <td *matCellDef="let row; index as i"
+            mat-cell>
+          {{i + 1}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="username-column">
+        <td *matCellDef="let user"
+            class="px-2 text-nowrap"
+            mat-cell>
+          {{user.username}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="first-name-column">
+        <td *matCellDef="let user"
+            class="px-2 text-nowrap"
+            mat-cell>
+          {{user.firstName}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="last-name-column">
+        <td *matCellDef="let user"
+            class="px-2 text-nowrap"
+            mat-cell>
+          {{user.lastName}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="role-column">
+        <td *matCellDef="let user"
+            class="px-2"
+            mat-cell>
+          {{user.role}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="enabled-column">
+        <td *matCellDef="let user"
+            class="px-2 text-center"
+            mat-cell>
+          <mat-icon *ngIf="user.enabled" color="primary" matPrefix>
+            check
+          </mat-icon>
+          <mat-icon *ngIf="!user.enabled" color="warn" matPrefix>
+            clear
+          </mat-icon>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="modify-column">
+        <td *matCellDef="let user"
+            class="px-2 text-center"
+            mat-cell>
+          <button class="align-middle m-0"
+                  (click)="modifyUser(user)"
+                  color="warn"
+                  mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete-column">
+        <td *matCellDef="let user"
+            class="px-2 text-center"
+            mat-cell>
+          <button class="align-middle m-0"
+                  (click)="deleteUser(user)"
+                  color="warn"
+                  mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+
+      <!-- Headers Main Row -->
+      <ng-container matColumnDef="header-row-number">
+        <th *matHeaderCellDef
+            class="col-1 px-2"
+            mat-header-cell>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="header-row-username">
+        <th *matHeaderCellDef
+            class="col-2 px-2"
+            mat-header-cell>
+          username
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="header-row-first-name">
+        <th *matHeaderCellDef
+            class="col-3 px-2"
+            mat-header-cell>
+          first name
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="header-row-last-name">
+        <th *matHeaderCellDef
+            class="col-3 px-2"
+            mat-header-cell>
+          last name
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="header-row-role">
+        <th *matHeaderCellDef
+            class="col-2 px-2"
+            mat-header-cell>
+          role
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="header-row-enabled">
+        <th *matHeaderCellDef
+            class="col-1 px-2 text-center"
+            mat-header-cell>
+          enabled
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="header-row-modify">
+        <th *matHeaderCellDef
+            class="col-1 px-2 text-center"
+            mat-header-cell>
+          modify
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="header-row-delete">
+        <th *matHeaderCellDef
+            class="col-1 px-2 text-center"
+            mat-header-cell>
+          delete
+        </th>
+      </ng-container>
+
+      <tr *matHeaderRowDef="[
+            'header-row-number',
+            'header-row-username',
+            'header-row-first-name',
+            'header-row-last-name',
+            'header-row-role',
+            'header-row-enabled',
+            'header-row-modify',
+            'header-row-delete',
+            ]"
+          mat-header-row>
+      </tr>
+
+      <tr *matRowDef="let row; columns: displayedColumns;"
+          mat-row>
+      </tr>
+
+    </table>
+      <div class="text-center display-6 my-3" *ngIf="dataSource?.filteredData?.length === 0">
+        No users found for current filter!
+      </div>
+    <mat-paginator
+      [pageSizeOptions]="[10, 100]"
+      class="mt-0 mb-2 overflow-auto"
+      showFirstLastButtons>
+    </mat-paginator>
+    </div>
+  </div>
+</div>
+
+

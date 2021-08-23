@@ -1,0 +1,57 @@
+<div class="display-6 text-center" mat-dialog-title>
+  Add new user
+</div>
+
+<div mat-dialog-content class="overflow-hidden">
+
+  <mat-form-field appearance="outline"
+                  class="w-100">
+    <mat-label>Username</mat-label>
+    <input [(ngModel)]="username"
+           matInput>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"
+                  class="w-100">
+    <mat-label>First name</mat-label>
+    <input [(ngModel)]="firstName"
+           matInput>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"
+                  class="w-100">
+    <mat-label>Last name</mat-label>
+    <input [(ngModel)]="lastName"
+           matInput>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline"
+                  class="w-100">
+    <mat-select [(ngModel)]="role"
+                matInput>
+      <mat-option value="admin">admin</mat-option>
+      <mat-option value="user">user</mat-option>
+    </mat-select>
+    <mat-label>Role</mat-label>
+  </mat-form-field>
+
+  <mat-checkbox [(ngModel)]="enabled"
+                class="mb-3"
+                matInput>
+    <mat-label>enabled</mat-label>
+  </mat-checkbox>
+
+</div>
+
+<div class="justify-content-center" mat-dialog-actions>
+  <button (click)="onConfirmClick()"
+          color="primary"
+          mat-raised-button>
+    Add
+  </button>
+  <button (click)="onCancelClick()"
+          color="warn"
+          mat-raised-button>
+    Cancel
+  </button>
+</div>
